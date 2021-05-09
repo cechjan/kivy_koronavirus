@@ -16,5 +16,7 @@ db.create_pes(pes)
 nakazeni = PocetNakazenychZaDen()
 nakazeni.pocet = 2198
 nakazeni.umrti = 74
+nakazeni.pes_stupen = 1
+nakazeni.kraj_id = 'MSK'
 nakazeni.datum = datetime.date(2021, 11, 3)
 db.create_nakazeni(nakazeni)

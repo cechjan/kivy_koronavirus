@@ -1,0 +1,137 @@
+#:import math.ceil math
+#:import utils kivy.utils
+
+BoxLayout:
+    orientation:'vertical'
+
+    MDToolbar:
+        title: 'Koronavirus'
+        md_bg_color: utils.get_color_from_hex('#1d3557')
+        specific_text_color: 1, 1, 1, 1
+
+    MDBottomNavigation:
+        id: navigation
+        panel_color: utils.get_color_from_hex('#2a4c7d')
+
+        MDBottomNavigationItem:
+            name: 'screen 1'
+            text: 'Počet nakažených'
+            icon: 'card-bulleted'
+
+            DatabaseScreen:
+
+
+<PersonContent>:
+    orientation: 'vertical'
+    size_hint_x: 1
+    size_hint_y: None
+    height: "100dp"
+
+    MDTextField:
+        id: person_name
+        text: 'jméno osoby'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+
+    MDDropDownItem:
+        id: state_item
+        pos_hint: {'center_x': .5, 'center_y': .7}
+        size_hint_x: 1
+        text: 'Stát'
+        on_release: self.parent.menu_states.open()
+
+<StateContent>:
+    orientation: 'vertical'
+    size_hint_x: 1
+    size_hint_y: None
+    height: "100dp"
+
+    MDTextField:
+        id: state_short_name
+        text: 'Zkratka státu'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+
+    MDTextField:
+        id: state_full_name
+        text: 'Celý název státu'
+        pos_hint: {'center_x': .5, 'center_y': .7}
+
+<Content>
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "120dp"
+
+    MDTextField:
+        id: nazev_kraje
+        hint_text: "Název kraje"
+
+    MDTextField:
+        id: zkratka_kraje
+        hint_text: "Zkratka kraje"
+
+
+<PesContent>
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "120dp"
+
+    MDTextField:
+        id: stupen
+        hint_text: "Číslo stupně"
+
+    MDTextField:
+        id: opatreni
+        hint_text: "Opatření"
+
+
+<NakazeniKrajContent>
+    orientation: "vertical"
+    size_hint_x: 1
+    size_hint_y: None
+    height: "300dp"
+
+    #MDTextField:
+    #    id: pes_zkratka_kraje
+    #    hint_text: "Zkratka kraje"
+
+    MDLabel:
+        text: "Zkratka kraje"
+
+    MDDropDownItem:
+        id: kraj_dropdown
+        on_release: self.parent.menu_kraj()
+
+    MDTextField:
+        id: pes_pocet_nakazenych
+        hint_text: "Počet nakažených"
+
+    #MDTextField:
+    #    id: pes_stupen
+    #    hint_text: "Pes stupeň"
+
+    MDLabel:
+        text: "Stupeň psa"
+
+    MDDropDownItem:
+        id: pes_dropdown
+        on_release: self.parent.menu_pes()
+
+    MDTextField:
+        id: pes_umrti
+        hint_text: "Počet úmrtí"
+
+    #MDTextField:
+    #    id: pes_datum
+    #    hint_text: "Datum"
+
+    #MDDatePicker:
+    #    id: pes_datum_picker
+    #    hint_text: "Datum"
+
+    MDRaisedButton:
+        id: pes_datum_picker
+        text: "Vyberte datum"
+        # on_release: self.parent.show_datepicker()
+        on_release: app.show_datepicker()
+

@@ -81,6 +81,13 @@ class Database:
         except:
             return False
 
+    def read_all(self, order=Kraj.zkratka_kraje):
+        try:
+            result = self.session.query(Kraj).order_by(order).all()
+            return result
+        except:
+            return False
+
     def read_kraj(self, order=Kraj.zkratka_kraje):
         try:
             result = self.session.query(Kraj).order_by(order).all()
