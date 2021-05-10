@@ -67,7 +67,7 @@ class NakazeniKrajDialog(MDDialog):
             type="custom",
             # content_cls=KrajContent(id=id),
             content_cls=NakazeniKrajContent(),
-            title='Nový záznam psa',
+            title='Nový záznam psa' if not id else "Editace záznamu",
             # text='Ahoj',
             size_hint=(0.8, 1),
             buttons=[
@@ -75,7 +75,13 @@ class NakazeniKrajDialog(MDDialog):
                 MDFlatButton(text='Zrušit', on_release=self.cancel_dialog)
             ]
         )
-
+        if id:
+            # self.content_cls.ids.pes_pocet_nakazenych.text = "10"
+            nakazeni = vars(app.nakazeni.database.read_nakazeni_by_id(id))
+            self.content_cls.ids.pes_pocet_nakazenych.text = str(nakazeni['pocet'])
+            self.content_cls.ids.kraj_dropdown.text = str(nakazeni['kraj_id'])
+            self.content_cls.ids.pes_dropdown.text = str(nakazeni['pes_stupen'])
+            self.content_cls.ids.pes_umrti.text = str(nakazeni['umrti'])
         self.id = id
 
     def save_dialog(self, *args):
